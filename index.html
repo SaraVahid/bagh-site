@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BAGH | Chahar Bagh</title>
+  <meta name="description" content="BAGH, a fictional fragrance house. Chahar Bagh: a garden in a drop." />
+  <meta name="theme-color" content="#14100C" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500&family=Vazirmatn:wght@300;400&display=swap"
+  />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="site-header__mark" href="#hero" aria-label="BAGH, back to top">
+      <!-- Placeholder: the logo SVG from assets/logo/ goes here in phase 4 -->
+      <span class="mark-placeholder" aria-hidden="true"></span>
+    </a>
+    <nav class="site-header__nav" aria-label="Main">
+      <a href="#top-notes">Notes</a>
+      <a href="#story">Story</a>
+    </nav>
+  </header>
+
+  <!-- Fixed stage behind the copy. Phase 2 puts the scroll-scrubbed <canvas> here. -->
+  <div class="stage" aria-hidden="true">
+    <div class="stage__placeholder"></div>
+  </div>
+
+  <main id="main">
+    <!-- Film sections. Heights follow the scroll map in CLAUDE.md; copy is sticky within each range. -->
+    <section id="hero" class="scene scene--hero" aria-labelledby="hero-title">
+      <div class="scene__inner grid">
+        <div class="scene__copy">
+          <h1 id="hero-title" class="wordmark">BAGH</h1>
+          <p class="wordmark-fa" lang="fa" dir="rtl">باغ</p>
+          <p class="tagline">A garden in a drop.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="drop" class="scene scene--drop" aria-labelledby="drop-title">
+      <div class="scene__inner grid">
+        <div class="scene__copy">
+          <p class="eyebrow">Chahar Bagh</p>
+          <h2 id="drop-title" class="scene__title">Placeholder: into the drop.</h2>
+        </div>
+      </div>
+    </section>
+
+    <section id="top-notes" class="scene scene--top" aria-labelledby="top-title">
+      <div class="scene__inner grid">
+        <div class="scene__copy">
+          <p class="eyebrow">Top notes</p>
+          <h2 id="top-title" class="scene__title">Open.</h2>
+          <p class="scene__note">Placeholder: fresh, green, bright.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="heart-notes" class="scene scene--heart" aria-labelledby="heart-title">
+      <div class="scene__inner grid">
+        <div class="scene__copy">
+          <p class="eyebrow">Heart notes</p>
+          <h2 id="heart-title" class="scene__title">Bloom.</h2>
+          <p class="scene__note">Placeholder: rose and jasmine.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="base-notes" class="scene scene--base" aria-labelledby="base-title">
+      <div class="scene__inner grid">
+        <div class="scene__copy">
+          <p class="eyebrow">Base notes</p>
+          <h2 id="base-title" class="scene__title">Linger.</h2>
+          <p class="scene__note">Placeholder: amber and warm musk.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bottle" class="scene scene--bottle" aria-labelledby="bottle-title">
+      <div class="scene__inner grid">
+        <div class="scene__copy">
+          <p class="eyebrow">Eau de parfum</p>
+          <h2 id="bottle-title" class="scene__title">Chahar Bagh</h2>
+          <p class="tagline">A garden in a drop.</p>
+          <a class="button" href="#story">Discover</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- After the film: normal document flow on a solid background -->
+    <section id="story" class="story" aria-labelledby="story-title">
+      <div class="grid">
+        <div class="story__copy">
+          <p class="eyebrow">The idea</p>
+          <h2 id="story-title" class="story__title">Paradise was once a walled garden.</h2>
+          <p>
+            Placeholder: the word comes from the Old Persian <em>pairidaeza</em>, "walled garden".
+            We kept it in a drop.
+          </p>
+          <p class="story__note">
+            Placeholder brand note. BAGH is a fictional concept; all visuals are AI-generated.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="grid">
+      <p class="site-footer__brand">BAGH <span lang="fa" dir="rtl">باغ</span></p>
+      <p class="site-footer__disclaimer">
+        BAGH is a fictional brand created as a creative direction exercise.
+        Imagery and film were generated with AI.
+      </p>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

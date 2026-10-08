@@ -1,0 +1,433 @@
+/* ==========================================================================
+   BAGH: design tokens, base, grid, sections
+   ========================================================================== */
+
+:root {
+  /* Colors (CLAUDE.md design system; do not add new ones without asking) */
+  --color-black: #14100c;
+  --color-gold: #c9a24b;
+  --color-gold-muted: #a88a42;
+  --color-turquoise: #2bb5b0;
+  --color-cream: #f4ede0;
+  --color-muted: #8f8269;
+
+  /* Derived from the palette, not new colors */
+  --text-body: rgb(244 237 224 / 0.78);   /* cream at reduced opacity */
+  --scrim: rgb(20 16 12 / 0.85);          /* warm black for text scrims */
+  --hairline: rgb(201 162 75 / 0.25);     /* gold hairlines */
+
+  /* Type */
+  --font-serif: "Cormorant Garamond", "Cormorant", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-fa: "Vazirmatn", sans-serif;
+
+  --fs-wordmark: clamp(3rem, 8vw, 6.5rem);
+  --fs-title: clamp(2.25rem, 5vw, 4.25rem);
+  --fs-story: clamp(1.75rem, 3.4vw, 2.75rem);
+  --fs-body: 0.9375rem;
+  --fs-small: 0.75rem;
+
+  /* Layout */
+  --gutter: 1rem;
+  --columns: 4;
+  --margin: 1.25rem;
+  --header-h: 4.5rem;
+  --tap: 44px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --columns: 12;
+    --gutter: 1.5rem;
+    --margin: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --margin: 5rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-black);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: 300;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 300;
+  color: var(--color-gold);
+  line-height: 1.05;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+[lang="fa"] {
+  font-family: var(--font-fa);
+}
+
+:focus-visible {
+  outline: 1px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--margin);
+  top: -100px;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--color-black);
+  color: var(--color-cream);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   Grid: 4 columns on mobile, 12 from 768px
+   -------------------------------------------------------------------------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  column-gap: var(--gutter);
+  padding-inline: var(--margin);
+  max-width: 1600px;
+  margin-inline: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 10;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: var(--margin);
+}
+
+.site-header__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--tap);
+  min-height: var(--tap);
+}
+
+/* Stand-in until the logo SVG is in assets/logo/: a plain drop outline */
+.mark-placeholder {
+  width: 18px;
+  height: 26px;
+  border: 1px solid var(--color-gold);
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+}
+
+.site-header__nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.site-header__nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding-inline: 0.75rem;
+  font-size: var(--fs-small);
+  letter-spacing: 0.08em;
+  color: var(--color-cream);
+  text-decoration: none;
+  opacity: 0.75;
+  transition: opacity 0.4s var(--ease);
+}
+
+.site-header__nav a:hover,
+.site-header__nav a:focus-visible {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Stage: fixed full-screen layer behind the film sections
+   -------------------------------------------------------------------------- */
+
+.stage {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-black);
+  overflow: hidden;
+}
+
+/* Placeholder for the film: an outline marking where the subject sits
+   (right of center on desktop, upper middle on mobile). Replaced in phase 2. */
+.stage__placeholder {
+  position: absolute;
+  left: 50%;
+  top: 34%;
+  width: min(56vw, 300px);
+  aspect-ratio: 1;
+  border: 1px solid var(--hairline);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (min-width: 768px) {
+  .stage__placeholder {
+    left: 62%;
+    top: 50%;
+    width: min(32vw, 440px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Film sections
+   Heights map to the scroll table in CLAUDE.md (in viewport units).
+   Copy is sticky so it holds on screen across its section's scroll range.
+   -------------------------------------------------------------------------- */
+
+.scene {
+  position: relative;
+}
+
+.scene--hero   { height: 100vh; }
+.scene--drop   { height: 200vh; }
+.scene--top    { height: 250vh; }
+.scene--heart  { height: 200vh; }
+.scene--base   { height: 150vh; }
+.scene--bottle { height: 150vh; }
+
+.scene__inner {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  align-content: end;
+  padding-bottom: 12vh;
+}
+
+/* Mobile: copy sits in the bottom third over a soft dark gradient */
+.scene__inner::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 50%;
+  background: linear-gradient(to top, var(--scrim), transparent);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.scene__copy {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+
+@media (min-width: 768px) {
+  .scene__inner {
+    align-content: center;
+    padding-bottom: 0;
+  }
+
+  /* Desktop: calm, dark left side for text */
+  .scene__inner::before {
+    inset: 0 auto 0 0;
+    width: 50%;
+    height: auto;
+    background: linear-gradient(to right, var(--scrim), transparent);
+  }
+
+  .scene__copy {
+    grid-column: 1 / span 5;
+  }
+}
+
+@media (min-width: 1280px) {
+  .scene__copy {
+    grid-column: 2 / span 4;
+  }
+}
+
+.wordmark {
+  font-size: var(--fs-wordmark);
+  letter-spacing: 0.4em;
+  margin-right: -0.4em; /* offset trailing letterspacing */
+}
+
+.wordmark-fa {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--color-gold-muted);
+}
+
+.tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  color: var(--color-cream);
+}
+
+.eyebrow {
+  font-size: var(--fs-small);
+  letter-spacing: 0.16em;
+  color: var(--color-gold-muted);
+}
+
+.scene__title {
+  font-size: var(--fs-title);
+}
+
+.scene__note {
+  max-width: 28ch;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap);
+  min-width: 10rem;
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+  font-size: var(--fs-small);
+  letter-spacing: 0.16em;
+  text-decoration: none;
+  transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
+}
+
+.button:hover,
+.button:focus-visible {
+  background: var(--color-gold);
+  color: var(--color-black);
+}
+
+/* --------------------------------------------------------------------------
+   Story and footer: normal flow on a solid background
+   -------------------------------------------------------------------------- */
+
+.story {
+  position: relative;
+  background: var(--color-black);
+  padding-block: clamp(6rem, 18vh, 12rem);
+  border-top: 1px solid var(--hairline);
+}
+
+.story__copy {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 1.5rem;
+  max-width: 38rem;
+}
+
+@media (min-width: 768px) {
+  .story__copy {
+    grid-column: 2 / span 7;
+  }
+}
+
+@media (min-width: 1280px) {
+  .story__copy {
+    grid-column: 3 / span 6;
+  }
+}
+
+.story__title {
+  font-size: var(--fs-story);
+}
+
+.story__note {
+  font-size: var(--fs-small);
+  color: var(--color-muted);
+}
+
+.site-footer {
+  position: relative;
+  background: var(--color-black);
+  padding-block: 3rem;
+  border-top: 1px solid var(--hairline);
+  font-size: var(--fs-small);
+  color: var(--color-muted);
+}
+
+.site-footer .grid {
+  row-gap: 1rem;
+}
+
+.site-footer__brand {
+  grid-column: 1 / -1;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  letter-spacing: 0.4em;
+  color: var(--color-gold);
+}
+
+.site-footer__disclaimer {
+  grid-column: 1 / -1;
+  max-width: 48ch;
+}
+
+@media (min-width: 768px) {
+  .site-footer__brand {
+    grid-column: 1 / span 4;
+  }
+
+  .site-footer__disclaimer {
+    grid-column: 7 / -1;
+    justify-self: end;
+    text-align: right;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion: no smooth transitions (static stills come in phase 4)
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
