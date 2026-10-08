@@ -218,6 +218,44 @@ a {
   }
 }
 
+/* Film canvas and the hero still that covers it while frames load */
+.stage__canvas,
+.stage__still {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.stage__still {
+  object-fit: cover;
+  transition: opacity 0.8s var(--ease);
+}
+
+.is-film-ready .stage__still {
+  opacity: 0;
+}
+
+/* Soft dark gradient behind the copy. It lives on the fixed stage so it
+   never scrolls with a section. Mobile: bottom third. Desktop: left side. */
+.stage::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 55%;
+  background: linear-gradient(to top, var(--scrim), transparent);
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .stage::after {
+    inset: 0 auto 0 0;
+    width: 55%;
+    height: auto;
+    background: linear-gradient(to right, var(--scrim), transparent);
+  }
+}
+
 /* --------------------------------------------------------------------------
    Film sections
    Heights map to the scroll table in CLAUDE.md (in viewport units).
@@ -244,17 +282,6 @@ a {
   padding-bottom: 12vh;
 }
 
-/* Mobile: copy sits in the bottom third over a soft dark gradient */
-.scene__inner::before {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  height: 50%;
-  background: linear-gradient(to top, var(--scrim), transparent);
-  pointer-events: none;
-  z-index: -1;
-}
-
 .scene__copy {
   grid-column: 1 / -1;
   display: grid;
@@ -266,14 +293,6 @@ a {
   .scene__inner {
     align-content: center;
     padding-bottom: 0;
-  }
-
-  /* Desktop: calm, dark left side for text */
-  .scene__inner::before {
-    inset: 0 auto 0 0;
-    width: 50%;
-    height: auto;
-    background: linear-gradient(to right, var(--scrim), transparent);
   }
 
   .scene__copy {

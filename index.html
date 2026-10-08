@@ -29,72 +29,88 @@
     </nav>
   </header>
 
-  <!-- Fixed stage behind the copy. Phase 2 puts the scroll-scrubbed <canvas> here. -->
-  <div class="stage" aria-hidden="true">
-    <div class="stage__placeholder"></div>
+  <!-- Fixed stage behind the copy: the scroll-scrubbed film plays on the canvas.
+       The hero still covers it until the first frames are loaded. -->
+  <div class="stage">
+    <div class="stage__placeholder" aria-hidden="true"></div>
+    <canvas
+      class="stage__canvas"
+      role="img"
+      aria-label="A short film that plays as you scroll: a golden drop opens into a Persian garden with a turquoise water channel, flowers and cypress trees, then pulls back to the perfume bottle."
+    ></canvas>
+    <img
+      class="stage__still"
+      src="/assets/stills/hero.webp"
+      alt="A golden drop holding a miniature Persian garden, floating above a crystal perfume bottle."
+      fetchpriority="high"
+      onerror="this.hidden = true"
+    />
   </div>
 
   <main id="main">
-    <!-- Film sections. Heights follow the scroll map in CLAUDE.md; copy is sticky within each range. -->
-    <section id="hero" class="scene scene--hero" aria-labelledby="hero-title">
-      <div class="scene__inner grid">
-        <div class="scene__copy">
-          <h1 id="hero-title" class="wordmark">BAGH</h1>
-          <p class="wordmark-fa" lang="fa" dir="rtl">باغ</p>
-          <p class="tagline">A garden in a drop.</p>
+    <!-- Film sections. Scroll progress through #film drives the frame index.
+         Heights follow the scroll map in CLAUDE.md; copy is sticky within each range. -->
+    <div id="film" class="film">
+      <section id="hero" class="scene scene--hero" aria-labelledby="hero-title">
+        <div class="scene__inner grid">
+          <div class="scene__copy">
+            <h1 id="hero-title" class="wordmark">BAGH</h1>
+            <p class="wordmark-fa" lang="fa" dir="rtl">باغ</p>
+            <p class="tagline">A garden in a drop.</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="drop" class="scene scene--drop" aria-labelledby="drop-title">
-      <div class="scene__inner grid">
-        <div class="scene__copy">
-          <p class="eyebrow">Chahar Bagh</p>
-          <h2 id="drop-title" class="scene__title">Placeholder: into the drop.</h2>
+      <section id="drop" class="scene scene--drop" aria-labelledby="drop-title">
+        <div class="scene__inner grid">
+          <div class="scene__copy">
+            <p class="eyebrow">Chahar Bagh</p>
+            <h2 id="drop-title" class="scene__title">Placeholder: into the drop.</h2>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="top-notes" class="scene scene--top" aria-labelledby="top-title">
-      <div class="scene__inner grid">
-        <div class="scene__copy">
-          <p class="eyebrow">Top notes</p>
-          <h2 id="top-title" class="scene__title">Open.</h2>
-          <p class="scene__note">Placeholder: fresh, green, bright.</p>
+      <section id="top-notes" class="scene scene--top" aria-labelledby="top-title">
+        <div class="scene__inner grid">
+          <div class="scene__copy">
+            <p class="eyebrow">Top notes</p>
+            <h2 id="top-title" class="scene__title">Open.</h2>
+            <p class="scene__note">Placeholder: fresh, green, bright.</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="heart-notes" class="scene scene--heart" aria-labelledby="heart-title">
-      <div class="scene__inner grid">
-        <div class="scene__copy">
-          <p class="eyebrow">Heart notes</p>
-          <h2 id="heart-title" class="scene__title">Bloom.</h2>
-          <p class="scene__note">Placeholder: rose and jasmine.</p>
+      <section id="heart-notes" class="scene scene--heart" aria-labelledby="heart-title">
+        <div class="scene__inner grid">
+          <div class="scene__copy">
+            <p class="eyebrow">Heart notes</p>
+            <h2 id="heart-title" class="scene__title">Bloom.</h2>
+            <p class="scene__note">Placeholder: rose and jasmine.</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="base-notes" class="scene scene--base" aria-labelledby="base-title">
-      <div class="scene__inner grid">
-        <div class="scene__copy">
-          <p class="eyebrow">Base notes</p>
-          <h2 id="base-title" class="scene__title">Linger.</h2>
-          <p class="scene__note">Placeholder: amber and warm musk.</p>
+      <section id="base-notes" class="scene scene--base" aria-labelledby="base-title">
+        <div class="scene__inner grid">
+          <div class="scene__copy">
+            <p class="eyebrow">Base notes</p>
+            <h2 id="base-title" class="scene__title">Linger.</h2>
+            <p class="scene__note">Placeholder: amber and warm musk.</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="bottle" class="scene scene--bottle" aria-labelledby="bottle-title">
-      <div class="scene__inner grid">
-        <div class="scene__copy">
-          <p class="eyebrow">Eau de parfum</p>
-          <h2 id="bottle-title" class="scene__title">Chahar Bagh</h2>
-          <p class="tagline">A garden in a drop.</p>
-          <a class="button" href="#story">Discover</a>
+      <section id="bottle" class="scene scene--bottle" aria-labelledby="bottle-title">
+        <div class="scene__inner grid">
+          <div class="scene__copy">
+            <p class="eyebrow">Eau de parfum</p>
+            <h2 id="bottle-title" class="scene__title">Chahar Bagh</h2>
+            <p class="tagline">A garden in a drop.</p>
+            <a class="button" href="#story">Discover</a>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
     <!-- After the film: normal document flow on a solid background -->
     <section id="story" class="story" aria-labelledby="story-title">
